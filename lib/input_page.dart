@@ -1,8 +1,10 @@
 import 'package:bmicalculator/reusable_card.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'constants.dart';
+import 'custom_btn.dart';
 import 'icon_content.dart';
 
 enum Gender {
@@ -20,6 +22,8 @@ class _InputPageState extends State<InputPage> {
   Color femaleCardColour = kInactiveCardColor;
   Gender selectedGender;
   int height = 180;
+  int weight = 60;
+  int age = 25;
 
   @override
   Widget build(BuildContext context) {
@@ -88,12 +92,11 @@ class _InputPageState extends State<InputPage> {
                   ),
                   SliderTheme(
                     data: SliderTheme.of(context).copyWith(
-                      activeTrackColor:Colors.white ,
-                      thumbColor: Color(0xFFEB1555),
-                      overlayColor: Color(0x29EB1555),
-                      thumbShape: RoundSliderThumbShape( ),
-                      overlayShape: RoundSliderOverlayShape()
-                    ),
+                        activeTrackColor: Colors.white,
+                        thumbColor: Color(0xFFEB1555),
+                        overlayColor: Color(0x29EB1555),
+                        thumbShape: RoundSliderThumbShape(),
+                        overlayShape: RoundSliderOverlayShape()),
                     child: Slider(
                       value: height.toDouble(),
                       min: 100.0,
@@ -114,11 +117,69 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: ReusableCard(
                     colour: kActiveCardColor,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'WEIGHR',
+                          style: kLabelTextStyle,
+                        ),
+                        Text(
+                          weight.toString(),
+                          style: kNumberTextStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundIconButton(
+                              icon: Icons.remove,
+                              onPress: () => setState(() => weight--),
+                            ),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            RoundIconButton(
+                              icon: Icons.add,
+                              onPress: () => setState(() => weight++),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Expanded(
                   child: ReusableCard(
                     colour: kActiveCardColor,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'AGE',
+                          style: kLabelTextStyle,
+                        ),
+                        Text(
+                          age.toString(),
+                          style: kNumberTextStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundIconButton(
+                              icon: Icons.remove,
+                              onPress: () => setState(() => age--),
+                            ),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            RoundIconButton(
+                              icon: Icons.add,
+                              onPress: () => setState(() => age++),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -130,7 +191,7 @@ class _InputPageState extends State<InputPage> {
             width: double.infinity,
             height: kBottomContainerHeight,
             child: Center(
-              child: Text('CALCULATE'),
+              child: Text('CALCULATE', style: kBtnTextStyle,),
             ),
           )
         ],
@@ -138,3 +199,5 @@ class _InputPageState extends State<InputPage> {
     );
   }
 }
+
+
