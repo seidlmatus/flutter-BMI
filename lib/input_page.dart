@@ -128,7 +128,7 @@ class _InputPageState extends State<InputPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'WEIGHR',
+                          'WEIGHT',
                           style: kLabelTextStyle,
                         ),
                         Text(
