@@ -1,11 +1,14 @@
-import 'package:bmicalculator/reusable_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'bottom_widget.dart';
 import 'constants.dart';
 import 'custom_btn.dart';
 import 'icon_content.dart';
+import 'result_page.dart';
+import 'calculator_brain.dart';
+import 'reusable_card.dart';
 
 enum Gender {
   male,
@@ -25,8 +28,12 @@ class _InputPageState extends State<InputPage> {
   int weight = 60;
   int age = 25;
 
+  CalculatorBrain calc;
+
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Text('BMI CALCULATOR'),
@@ -185,15 +192,24 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            color: kBottomContainerColor,
-            margin: EdgeInsets.only(top: 10.0),
-            width: double.infinity,
-            height: kBottomContainerHeight,
-            child: Center(
-              child: Text('CALCULATE', style: kBtnTextStyle,),
-            ),
-          )
+          BottomWidget(
+            text: 'CALCULATE',
+            onTap: () {
+              CalculatorBrain calc =
+              CalculatorBrain(height: height, weight: weight);
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ResultsPage(
+                    bmiResult: calc.calculateBMI(),
+                    result: calc.getResult(),
+                    interpretation: calc.getInterpretation(),
+                  ),
+                ),
+              );
+            },
+          ),
         ],
       ),
     );
